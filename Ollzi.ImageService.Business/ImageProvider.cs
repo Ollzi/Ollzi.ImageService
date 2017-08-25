@@ -8,5 +8,6 @@ namespace Ollzi.ImageService.Business
 {
     public class ImageProvider
     {
+
     }
 }
