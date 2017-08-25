@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ollzi.ImageService.Business
 {
-    public class Class1
+    public class ImageProvider
     {
     }
 }
