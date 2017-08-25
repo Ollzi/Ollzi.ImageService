@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace Ollzi.ImageService.Business
 {
-    public class ImageProvider
+    public interface IImageProvider
     {
+        string[] GetImageFiles(string basePath);
+    }
 
+    public class ImageProvider : IImageProvider
+    {
+        public string[] GetImageFiles(string basePath)
+        {
+            return Directory.GetFiles(basePath, "*.png,*.jpg", SearchOption.AllDirectories);
+        }
     }
 }

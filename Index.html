@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <img id="image" data-bind="attr:{src: fileName}"/>
+    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/core.js" type="text/javascript"></script>
+</body>
+</html>
+
+<script type="text/javascript" language="javascript">
+    var ImageViewModel = function() {
+
+        var images = ko.observableArray([]);
+
+        var initialize = function() {
+            $.ajax({
+                url: "http://localhost/Ollzi.ImageService/Api/Images/"
+            }).done(function() {
+                
+            });
+        }
+
+        return {
+            initialize: initialize
+        }
+    };
+
+    var imageViewModel = new ImageViewModel();
+    imageViewModel.initialize();
+</script>
