@@ -7,12 +7,9 @@ namespace Ollzi.ImageService.Contracts
     public class ImageMetaData
     {
         [DataMember]
-        public string FilePath { get; set; }
-
-        [DataMember]
         public string FileName { get; set; }
 
         [DataMember]
-        public DateTime FileDate { get; set; }
+        public string FileDate { get; set; }
     }
 }

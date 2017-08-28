@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Windows.Media.Imaging;
 using Ollzi.ImageService.Contracts;
 
 namespace Ollzi.ImageService.Business.Action
@@ -33,13 +35,34 @@ namespace Ollzi.ImageService.Business.Action
 
             while (randomizedFiles.Count < numberOfFilesToRandomize)
             {
-                var index = random.Next(0, numberOfFilesToRandomize);
+                var index = random.Next(0, imageFiles.Length);
 
                 if (randomizedFiles.All(m => m.FileName != imageFiles[index]))
                 {
+                    string fileDate = "";
+
+                    using (FileStream fs = new FileStream(imageFiles[index], FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+
+                        BitmapSource img = BitmapFrame.Create(fs);
+                        var md = img.Metadata as BitmapMetadata;
+
+                        if (md != null)
+                        {
+                            fileDate = md.DateTaken;
+                        }
+
+                        if (string.IsNullOrEmpty(fileDate))
+                        {
+                            var fileInfo = new FileInfo(imageFiles[index]);
+                            fileDate = fileInfo.CreationTime.ToString("yyyy-MM-dd");
+                        }
+                    }
+
                     randomizedFiles.Add(new ImageMetaData
                     {
-                        FileName = imageFiles[index]
+                        FileName = imageFiles[index],
+                        FileDate = fileDate
                     });
                 }
             }
