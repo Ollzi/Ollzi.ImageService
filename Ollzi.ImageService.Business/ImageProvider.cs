@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace Ollzi.ImageService.Business
 {
@@ -11,7 +12,9 @@ namespace Ollzi.ImageService.Business
     {
         public string[] GetImageFiles(string basePath)
         {
-            return Directory.GetFiles(basePath, "*.png,*.jpg", SearchOption.AllDirectories);
+            var searchPattern = new[] {"*.png", "*.jpg"};
+
+            return searchPattern.SelectMany(x => Directory.GetFiles(basePath, x, SearchOption.AllDirectories)).ToArray();
         }
     }
 }
