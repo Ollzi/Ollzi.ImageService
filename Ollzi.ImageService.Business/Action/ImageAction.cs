@@ -29,7 +29,7 @@ namespace Ollzi.ImageService.Business.Action
         {
             var imageFiles = _imageProvider.GetImageFiles(_basePath);
             var random = new Random();
-            var numberOfFilesToRandomize = imageFiles.Length >= 20 ? 20 : imageFiles.Length;
+            var numberOfFilesToRandomize = imageFiles.Length >= 100 ? 100 : imageFiles.Length;
 
             var randomizedFiles = new List<ImageMetaData>();
 

@@ -10,6 +10,8 @@ namespace Ollzi.ImageService.Web
     {
         public static void Register(HttpConfiguration config)
         {
+            config.EnableCors();
+
             // Web API configuration and services
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 

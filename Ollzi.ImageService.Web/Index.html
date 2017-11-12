@@ -28,7 +28,7 @@
 <body>
     
     <div id="imageContainer">
-        <img id="image" data-bind="attr:{src: filePath}" />
+        <img id="image" data-bind="attr:{src: fileName}" />
         <span data-bind="text: fileDate" style="position: absolute; bottom: 15px; left: 25px; z-index: 1; color: darkgray"></span>
     </div>
     
@@ -41,15 +41,11 @@
 
 <script type="text/javascript" language="javascript">
     var ImageViewModel = function() {
-        var baseUrl = "http://192.168.1.196/";
+
         var images = ko.observableArray([]);
-        var fileName = ko.observable("");
+        var fileName = ko.observable();
         var fileDate = ko.observable();
         var currentIndex = 0;
-
-        var filePath = ko.computed(function () {
-            return baseUrl + "Ollzi.ImageService.Web/Api/Image/GetImage?image=" + encodeURI(fileName());
-        });
 
         var timeOut = function () {
             setTimeout(function () {
@@ -67,7 +63,7 @@
 
         var fetchImages = function () {
             $.ajax({
-                url: baseUrl + "Ollzi.ImageService.Web/Api/Image/"
+                url: "http://kontoret/ImageService/Api/Image/"
             }).done(function (fetchedImages) {
                 currentIndex = 0;
                 images(fetchedImages);
@@ -84,8 +80,7 @@
         return {
             initialize: initialize,
             fileName: fileName,
-            fileDate: fileDate,
-            filePath: filePath
+            fileDate: fileDate
         }
     };
 
